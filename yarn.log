@@ -1,0 +1,3 @@
+yarn add @react-navigation/native @react-navigation/stack \
+    react-native-safe-area-context module react-native-gesture-handler \
+    react-native-screens
