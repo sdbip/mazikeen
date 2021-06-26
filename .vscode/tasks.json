@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "yarn install & npx pod-install",
+			"problemMatcher": [],
+			"label": "iOS",
+			"detail": "Build for iOS/Xcode",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
