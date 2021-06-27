@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image, Text, View } from 'react-native';
+import { Image, View } from 'react-native';
+import HTMLView from 'react-native-htmlview';
 
 export interface Show {
   name: string,
@@ -17,7 +18,7 @@ const ShowScreen = (props: any) => {
     <View 
         style={{flexDirection: 'column', alignItems: 'center', height: '100%'}}>
       <Image style={{width: '100%', flex: 1}} source={{uri: show.image ?? ''}} />
-      <Text>{show.summary}</Text>
+      <HTMLView value={show.summary} stylesheet={{p: {margin: 15}}} />
     </View>
   )
 }
