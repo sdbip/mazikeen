@@ -32,7 +32,8 @@ const SearchScreen = (props: any) => {
   const performSearch = async (searchText: string) => {
     const response = await fetch(`http://api.tvmaze.com/search/shows?q=${searchText}`)
     if (!response.ok) {
-      setData([{id: 'error', title: await response.text(), image: ''}])
+      Alert.alert('TV Maze returned an error status', await response.text())
+      return
     }
 
     const json = await response.json()
