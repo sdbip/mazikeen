@@ -19,9 +19,9 @@ const SearchScreen = (props: any) => {
   const renderShow = (show: Show) => (
     <TapGestureHandler onActivated={(data) => props.navigation.push('ShowScreen', show)}>
       <View
-          style={{flexDirection: 'row', alignItems: 'center', width: '100%',backgroundColor: 'pink'}}>
-        <Image style={{width: 50, height: 50}} source={{uri: show.image ?? ''}} />
-        <Text style={{color: 'black'}}>{show.id} {show.title}</Text>
+          style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
+        <Image style={{width: 50, height: 50, marginRight: 10}} source={{uri: show.image ?? ''}} />
+        <Text style={{color: 'black'}}>{show.title}</Text>
       </View>
     </TapGestureHandler>
   )
