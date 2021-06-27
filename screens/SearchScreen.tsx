@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { FlatList, Image, Text, TextInput, View } from 'react-native';
+import { Alert, FlatList, Image, Text, TextInput, View } from 'react-native';
 import { TapGestureHandler } from 'react-native-gesture-handler';
+import { Show as Details } from './ShowScreen';
 
 interface Show {
   id: string,
   title: string,
+  url: string,
   image: string | undefined
 }
 
@@ -13,7 +15,7 @@ const SearchScreen = (props: any) => {
   const [timer, setTimer] = useState(null as NodeJS.Timeout | null)
 
   const renderShow = (show: Show) => (
-    <TapGestureHandler onActivated={(data) => props.navigation.push('ShowScreen', show)}>
+    <TapGestureHandler onActivated={() => displayShow(show)}>
       <View
           style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
         <Image style={{width: 50, height: 50, marginRight: 10}} source={{uri: show.image ?? ''}} />
@@ -21,6 +23,23 @@ const SearchScreen = (props: any) => {
       </View>
     </TapGestureHandler>
   )
+
+  const displayShow = async (show: Show) => {
+    const response = await fetch(show.url)
+    if (!response.ok) {
+      Alert.alert('TV Maze returned an error status', await response.text())
+      return
+    }
+
+    const json = await response.json()
+    const details: Details = {
+      name: json.name,
+      summary: json.summary,
+      rating: json.rating.average,
+      image: json.image.original
+    }
+    props.navigation.push('ShowScreen', details)
+  }
 
   const searchAfter = (millis: number, searchString: string) => {
     if (timer) clearTimeout(timer);
@@ -39,7 +58,12 @@ const SearchScreen = (props: any) => {
     const json = await response.json()
     console.info('json', json)
     const data = json
-      .map((o: any) => ({id: o.show.id, title: o.show.name, image: o.show.image?.medium}))
+      .map((o: any) => ({
+        id: o.show.id,
+        title: o.show.name,
+        url: o.show._links.self.href,
+        image: o.show.image?.medium
+      }))
     console.info('data', data)
     setData(data)
   }

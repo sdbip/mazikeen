@@ -1,18 +1,10 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import SearchScreen from './screens/SearchScreen';
+import ShowScreen from './screens/ShowScreen';
 
 const Stack = createStackNavigator()
-
-const ShowScreen = (props: any) => {
-  props.navigation.setOptions({title: props.route.params.title});
-
-  return (
-    <Text>Screen 2: {props.route.params.id}</Text>
-  )
-}
 
 const App = () => {
   return (
