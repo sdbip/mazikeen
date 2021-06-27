@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, FlatList, Image, Text, TextInput, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, Header } from '@react-navigation/stack'
+import { TapGestureHandler } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator()
 
@@ -16,12 +17,13 @@ const SearchScreen = (props: any) => {
   const [timer, setTimer] = useState(null as NodeJS.Timeout | null)
 
   const renderShow = (show: Show) => (
-    <View
-        onStartShouldSetResponder={() => {props.navigation.push('ShowScreen', show); return false;}}
-        style={{flexDirection: 'row', alignItems: 'center', width: '100%',backgroundColor: 'pink'}}>
-      <Image style={{width: 50, height: 50}} source={{uri: show.image ?? ''}} />
-      <Text style={{color: 'black'}}>{show.id} {show.title}</Text>
-    </View>
+    <TapGestureHandler onActivated={(data) => props.navigation.push('ShowScreen', show)}>
+      <View
+          style={{flexDirection: 'row', alignItems: 'center', width: '100%',backgroundColor: 'pink'}}>
+        <Image style={{width: 50, height: 50}} source={{uri: show.image ?? ''}} />
+        <Text style={{color: 'black'}}>{show.id} {show.title}</Text>
+      </View>
+    </TapGestureHandler>
   )
 
   const searchAfter = (millis: number, searchString: string) => {
