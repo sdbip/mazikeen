@@ -4,7 +4,7 @@ Sample of work for Astra Zeneca
 
 ## Nice-to-haves and other “future” changes
 
-The TV Maze API does not return more than a few matches from a search. I don't see the need for paging (or endless scrolling). Nor have I seen any way to add paging parameters to the search URL.
+The TV Maze API does not return more than a few matches from a search. I don't see the need for paging (or endless scrolling). Nor have I seen any way to add paging parameters to their search URL.
 
 The other nice-to-haves would be interesting add if there was more time:
 
