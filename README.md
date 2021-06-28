@@ -2,6 +2,35 @@
 
 Sample of work for Astra Zeneca
 
+## Running the application
+
+### Android
+
+Build by running 
+
+```
+yarn install
+```
+
+I have run it by opening the android folder in Android Studio and runnning from there.
+
+The following is supposed to work too, though it hasn't worked for me:
+
+```
+react-native run-android
+```
+
+### iOS
+
+Build by running the following:
+
+```
+yarn install & npx pod-install
+```
+
+Then open ios/Mazikeen.xcworkspace in Xcode and run from there.
+
+
 ## Nice-to-haves and if-I-had-more-time features
 
 The TV Maze API does not return more than a few matches from a search. I don't see the need for paging (or endless scrolling). Nor have I seen any way to add paging parameters to their search URL.
