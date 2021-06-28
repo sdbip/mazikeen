@@ -13,6 +13,7 @@ interface Show {
 const SearchScreen = (props: any) => {
   const [data, setData] = useState([] as Show[])
   const [timer, setTimer] = useState(null as NodeJS.Timeout | null)
+  const [mode, setMode] = useState('none')
 
   const renderShow = (show: Show) => (
     <TapGestureHandler onActivated={() => displayShow(show)}>
@@ -49,6 +50,7 @@ const SearchScreen = (props: any) => {
   }
 
   const performSearch = async (searchText: string) => {
+    setMode('loading')
     const response = await fetch(`http://api.tvmaze.com/search/shows?q=${searchText}`)
     if (!response.ok) {
       Alert.alert('TV Maze returned an error status', await response.text())
@@ -64,6 +66,7 @@ const SearchScreen = (props: any) => {
         image: o.show.image?.medium
       }))
     setData(data)
+    setMode(data.length ? 'none' : 'no_data')
   }
   
   return (
@@ -75,13 +78,17 @@ const SearchScreen = (props: any) => {
           placeholder="Search TV Shows..."
           onChangeText={(text) => searchAfter(1000, text)}
        />
-      <FlatList
+      {mode == 'loading'
+      ? (<Text>Loading...</Text>)
+      : mode == 'no_data'
+      ? (<Text>No data found</Text>)
+      : (
+        <FlatList
           contentInsetAdjustmentBehavior="automatic"
           data={data}
           renderItem={(itemData) => {return renderShow(itemData.item)}}
           keyExtractor={item => item.id}
-        >
-      </FlatList>
+        />)}
     </View>
   )
 }
