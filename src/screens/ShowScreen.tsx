@@ -2,18 +2,10 @@ import React from 'react'
 import { useState } from 'react'
 import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
-
-export interface Show {
-  name: string,
-  year: number,
-  channel: string,
-  summary: string,
-  rating: string,
-  image: string | null
-}
+import { Details } from "./Show"
 
 const ShowScreen = (props: any) => {
-  const show = props.route.params as Show
+  const show = props.route.params as Details
 
   const [imageHeight, setImageHeight] = useState(200)
   const width = Dimensions.get('window').width

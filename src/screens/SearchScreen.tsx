@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
 import { Alert, FlatList, Image, Text, TextInput, View } from 'react-native'
 import { TapGestureHandler } from 'react-native-gesture-handler'
-import { Show as Details } from './ShowScreen'
-
-interface Show {
-  id: string,
-  title: string,
-  url: string,
-  image: string | undefined
-}
+import { getDetails, findShows, ErrorResult } from './tvmaze'
+import { Show } from "./Show"
 
 const SearchScreen = (props: any) => {
   const [data, setData] = useState([] as Show[])
   const [timer, setTimer] = useState(null as NodeJS.Timeout | null)
-  const [mode, setMode] = useState('none')
+  const [mode, setMode] = useState('none' as 'none'|'no_data'|'loading')
 
   return (
     <View>
@@ -52,21 +46,13 @@ const SearchScreen = (props: any) => {
   }
 
   async function displayShow(show: Show) {
-    const response = await fetch(show.url)
-    if (!response.ok) {
-      Alert.alert('TV Maze returned an error status', await response.text())
+    const result = await getDetails(show)
+    if (result[0] == 'error') {
+      alertError(result)
       return
     }
 
-    const json = await response.json()
-    const details: Details = {
-      name: json.name,
-      year: json.premiered && new Date(Date.parse(json.premiered)).getFullYear(),
-      channel: json.network?.name ?? json.webChannel?.name,
-      summary: json.summary,
-      rating: json.rating.average,
-      image: json.image?.original
-    }
+    const [_, details] = result
     props.navigation.push('ShowScreen', details)
   }
 
@@ -79,22 +65,21 @@ const SearchScreen = (props: any) => {
 
   async function performSearch(searchText: string) {
     setMode('loading')
-    const response = await fetch(`http://api.tvmaze.com/search/shows?q=${searchText}`)
-    if (!response.ok) {
-      Alert.alert('TV Maze returned an error status', await response.text())
+    const result = await findShows(searchText)
+    if (result[0] == 'error') {
+      alertError(result)
+      setMode('no_data')
       return
     }
 
-    const json = await response.json()
-    const data = json
-      .map((o: any) => ({
-        id: o.show.id,
-        title: o.show.name,
-        url: o.show._links.self.href,
-        image: o.show.image?.medium
-      }))
+    const [_, data] = result
     setData(data)
     setMode(data.length ? 'none' : 'no_data')
+  }
+
+  function alertError(result: ErrorResult) {
+    const [_, errorTitle, errorMessage] = result
+    Alert.alert(errorTitle, errorMessage)
   }
 }
 
