@@ -36,8 +36,7 @@ const SearchScreen = (props: any) => {
     const details: Details = {
       name: json.name,
       year: json.premiered && new Date(Date.parse(json.premiered)).getFullYear(),
-      channel: json.webChannel?.name,
-      country: json.webChannel?.country,
+      channel: json.network?.name ?? json.webChannel?.name,
       summary: json.summary,
       rating: json.rating.average,
       image: json.image?.original
