@@ -1,7 +1,7 @@
 import React from 'react'
-import { useState } from 'react';
-import { Dimensions, Image, ScrollView, Text, View } from 'react-native';
-import HTMLView from 'react-native-htmlview';
+import { useState } from 'react'
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
+import HTMLView from 'react-native-htmlview'
 
 export interface Show {
   name: string,
@@ -19,7 +19,7 @@ const ShowScreen = (props: any) => {
   const width = Dimensions.get('window').width
   updateImageHeight()
 
-  props.navigation.setOptions({title: `${show.name} (${show.rating ?? 'not rated'})`});
+  props.navigation.setOptions({title: `${show.name} (${show.rating ?? 'not rated'})`})
 
   return (
     <ScrollView>
@@ -32,7 +32,7 @@ const ShowScreen = (props: any) => {
   function updateImageHeight() {
     if (!show.image) return
 
-    Image.getSize(show.image, (_width, _height) => setImageHeight(width / _width * _height));
+    Image.getSize(show.image, (_width, _height) => setImageHeight(width / _width * _height))
   }
 }
 
