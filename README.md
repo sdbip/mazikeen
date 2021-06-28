@@ -8,17 +8,15 @@ The TV Maze API does not return more than a few matches from a search. I don't s
 
 The other nice-to-haves (persistent cache and favourites) would be interesting to add if there was more time.
 
-The search text-box should have a placeholder text indicating what to type in.
-
 There's a warning when the show doesn't have a `medium` image. I should probably use the `original` image as fallback, or if that too is missing: a static (bundled) image.
 
 I believe that if I had written the nested functions using the `function` keyword, I could place them at the end of their parent function. This would probably make the parent more readable (and the parent is probably more important than its nested children to the reader). The `const` format (which I chose because it seems to be much more popular) requires that they are defined (assignments executed) before they can be called.
 
 I have assumed that the JSON returned from TVMaze is always valid (except if the response is not `ok()`). This assumption holds for all the series I have tested, but I cannot test them all (and certainly not changes that may happen in the future). I should probably handle bad JSON and missing fields (beyond missing images). And also if a field is of a different type than expected.
 
-I noticed that the poster is often very big, and the show summary can sometimes be quite long (and cut off if the both coincide). Maybe the poster should be made smaller when that happens? Or maybe I should just wrap them both in a `ScrollView`.
+I noticed that the poster is often very big, and the show summary can sometimes be quite long (and the layout gets weird if they both coincide). Maybe I should wrap them both in a `ScrollView`.
 
-It would be cool if you could play the theme song from the show details. And trailers or memorable scenes.
+It would be cool if you could play the theme song from the show details. And trailers or memorable scenes, but that will probably require backend support.
 
 ## Referenced Packages
 
