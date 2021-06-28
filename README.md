@@ -25,7 +25,9 @@ You can also run by opening the android folder in Android Studio and runnning fr
 Build by running the following:
 
 ```
-yarn install && pushd ios && pod install; popd
+yarn install
+cd ios
+pod install
 ```
 
 Then open ios/Mazikeen.xcworkspace in Xcode and run from there.
