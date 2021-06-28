@@ -38,7 +38,7 @@ const SearchScreen = (props: any) => {
       <TapGestureHandler onActivated={() => displayShowDetails(show)}>
         <View
             style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
-          <Image style={{width: 50, height: 50, marginRight: 10}} source={{uri: show.image ?? ''}} />
+          <Image style={{width: 50, height: 50, marginRight: 10}} source={show.image ? {uri: show.image} : require('../../img/no-image.png')} />
           <Text style={{color: 'black'}}>{show.title}</Text>
         </View>
       </TapGestureHandler>
