@@ -12,13 +12,13 @@ Build by running
 yarn install
 ```
 
-I have run it by opening the android folder in Android Studio and runnning from there.
-
-The following is supposed to work too, though it hasn't worked for me:
+Then run the following:
 
 ```
-react-native run-android
+npx react-native run-android
 ```
+
+You can also run by opening the android folder in Android Studio and runnning from there.
 
 ### iOS
 
