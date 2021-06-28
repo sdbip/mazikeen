@@ -10,7 +10,7 @@ const SearchScreen = (props: any) => {
   const [mode, setMode] = useState('none' as 'none'|'no_data'|'loading')
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <TextInput
           style={{backgroundColor: 'white', margin: 10, padding: 5, borderRadius: 10}}
           autoCapitalize={'none'}
