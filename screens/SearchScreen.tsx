@@ -35,12 +35,12 @@ const SearchScreen = (props: any) => {
     const json = await response.json()
     const details: Details = {
       name: json.name,
-      year: new Date(Date.parse(json.premiered)).getFullYear(),
+      year: json.premiered && new Date(Date.parse(json.premiered)).getFullYear(),
       channel: json.webChannel?.name,
       country: json.webChannel?.country,
       summary: json.summary,
       rating: json.rating.average,
-      image: json.image.original
+      image: json.image?.original
     }
     props.navigation.push('ShowScreen', details)
   }
