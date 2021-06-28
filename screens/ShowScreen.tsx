@@ -21,7 +21,7 @@ const ShowScreen = (props: any) => {
     <ScrollView>
       <Image style={{flex: 1}} source={{uri: show.image ?? '', height: 200}} />
       <Text>{show.channel} {show.year} {show.country && `(${show.country})`}</Text>
-      <HTMLView value={show.summary} stylesheet={{p: {margin: 15}}} />
+      <HTMLView value={show.summary ?? '<p><em>No summary was returned</em></p>'} stylesheet={{p: {margin: 15}}} />
     </ScrollView>
   )
 }
