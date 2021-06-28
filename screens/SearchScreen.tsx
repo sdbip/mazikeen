@@ -56,7 +56,6 @@ const SearchScreen = (props: any) => {
     }
 
     const json = await response.json()
-    console.info('json', json)
     const data = json
       .map((o: any) => ({
         id: o.show.id,
@@ -64,7 +63,6 @@ const SearchScreen = (props: any) => {
         url: o.show._links.self.href,
         image: o.show.image?.medium
       }))
-    console.info('data', data)
     setData(data)
   }
   
@@ -74,11 +72,11 @@ const SearchScreen = (props: any) => {
           style={{backgroundColor: 'white', margin: 10, padding: 5, borderRadius: 10}}
           autoCapitalize={'none'}
           autoCorrect={false}
+          placeholder="Search TV Shows..."
           onChangeText={(text) => searchAfter(1000, text)}
        />
       <FlatList
           contentInsetAdjustmentBehavior="automatic"
-          style={{}}
           data={data}
           renderItem={(itemData) => {return renderShow(itemData.item)}}
           keyExtractor={item => item.id}
