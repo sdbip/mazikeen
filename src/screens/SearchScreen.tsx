@@ -27,15 +27,15 @@ const SearchScreen = (props: any) => {
         <FlatList
           contentInsetAdjustmentBehavior="automatic"
           data={data}
-          renderItem={(itemData) => {return renderShow(itemData.item)}}
+          renderItem={(itemData) => {return renderShowItem(itemData.item)}}
           keyExtractor={item => item.id}
          />)}
     </View>
   )
 
-  function renderShow(show: Show) {
+  function renderShowItem(show: Show) {
     return (
-      <TapGestureHandler onActivated={() => displayShow(show)}>
+      <TapGestureHandler onActivated={() => displayShowDetails(show)}>
         <View
             style={{flexDirection: 'row', alignItems: 'center', width: '100%'}}>
           <Image style={{width: 50, height: 50, marginRight: 10}} source={{uri: show.image ?? ''}} />
@@ -45,7 +45,7 @@ const SearchScreen = (props: any) => {
     )
   }
 
-  async function displayShow(show: Show) {
+  async function displayShowDetails(show: Show) {
     const result = await getDetails(show)
     if (result[0] == 'error') {
       alertError(result)
