@@ -1,9 +1,12 @@
 import React from 'react'
-import { Image, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 
 export interface Show {
   name: string,
+  year: number,
+  channel: string,
+  country: string | null,
   summary: string,
   rating: string,
   image: string | null
@@ -15,11 +18,11 @@ const ShowScreen = (props: any) => {
   props.navigation.setOptions({title: `${show.name} (${show.rating ?? 'not rated'})`});
 
   return (
-    <View 
-        style={{flexDirection: 'column', alignItems: 'center', height: '100%'}}>
-      <Image style={{width: '100%', flex: 1}} source={{uri: show.image ?? ''}} />
+    <ScrollView>
+      <Image style={{flex: 1}} source={{uri: show.image ?? '', height: 200}} />
+      <Text>{show.channel} {show.year} {show.country && `(${show.country})`}</Text>
       <HTMLView value={show.summary} stylesheet={{p: {margin: 15}}} />
-    </View>
+    </ScrollView>
   )
 }
 

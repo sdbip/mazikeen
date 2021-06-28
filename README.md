@@ -2,7 +2,7 @@
 
 Sample of work for Astra Zeneca
 
-## Nice-to-haves and other “future” changes
+## Nice-to-haves and if-I-had-more-time features
 
 The TV Maze API does not return more than a few matches from a search. I don't see the need for paging (or endless scrolling). Nor have I seen any way to add paging parameters to their search URL.
 
@@ -14,9 +14,9 @@ I believe that if I had written the nested functions using the `function` keywor
 
 I have assumed that the JSON returned from TVMaze is always valid (except if the response is not `ok()`). This assumption holds for all the series I have tested, but I cannot test them all (and certainly not changes that may happen in the future). I should probably handle bad JSON and missing fields (beyond missing images). And also if a field is of a different type than expected.
 
-I noticed that the poster is often very big, and the show summary can sometimes be quite long (and the layout gets weird if they both coincide). Maybe I should wrap them both in a `ScrollView`.
-
 It would be cool if you could play the theme song from the show details. And trailers or memorable scenes, but that will probably require backend support.
+
+I suppose I could add links to the “externals” (tvrage, thetvdb or imdb).
 
 ## Referenced Packages
 
