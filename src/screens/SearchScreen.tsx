@@ -23,11 +23,10 @@ const SearchScreen = (props: any) => {
       ? (<Text>Loading...</Text>)
       : mode == 'no_data'
       ? (<Text>No data found</Text>)
-      : (
-        <FlatList
+      : (<FlatList
           contentInsetAdjustmentBehavior="automatic"
           data={data}
-          renderItem={(itemData) => {return renderShowItem(itemData.item)}}
+          renderItem={({item}) => renderShowItem(item)}
           keyExtractor={item => item.id}
          />)}
     </View>
@@ -76,11 +75,11 @@ const SearchScreen = (props: any) => {
     setData(data)
     setMode(data.length ? 'none' : 'no_data')
   }
-
-  function alertError(result: ErrorResult) {
-    const [_, errorTitle, errorMessage] = result
-    Alert.alert(errorTitle, errorMessage)
-  }
 }
 
 export default SearchScreen
+
+function alertError(result: ErrorResult) {
+  const [_, errorTitle, errorMessage] = result
+  Alert.alert(errorTitle, errorMessage)
+}
